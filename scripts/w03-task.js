@@ -97,7 +97,7 @@ getTotal.addEventListener('click', () => {
 /* ARRAY METHODS - Functional Programming */
 /* Output Source Array */
 const numbersArray = [1,2,3,4,5,6,7,8,9,10,11,12,13];
-const numbersArrayElement = document.getElementById("numbersArray");
+const numbersArrayElement = document.getElementById("array");
 numbersArrayElement.textContent = numbersArray.join(', ');
 
 /* Output Odds Only Array */
