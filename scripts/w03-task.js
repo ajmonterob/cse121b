@@ -96,26 +96,30 @@ getTotal.addEventListener('click', () => {
 
 /* ARRAY METHODS - Functional Programming */
 /* Output Source Array */
-let numbersArray = [1,2,3,4,5,6,7,8,9,10,11,12,13];
-numbersArray.textContent = numbers.join(', ');
+const numbersArray = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+const numbersArrayElement = document.getElementById("numbersArray");
+numbersArrayElement.textContent = numbersArray.join(', ');
 
 /* Output Odds Only Array */
 const oddsElement = document.getElementById("odds");
-oddsElement.textContent = numbers.filter(num => num % 2 === 1).join(', ');
+oddsElement.textContent = numbersArray.filter(num => num % 2 === 1).join(', ');
 
 /* Output Evens Only Array */
 const evensElement = document.getElementById("evens");
-evensElement.textContent = numbers.filter(num => num % 2 === 0).join(', ');
+evensElement.textContent = numbersArray.filter(num => num % 2 === 0).join(', ');
 
 /* Output Sum of Org. Array */
 const sumOfArrayElement = document.getElementById("sumOfArray");
-sumOfArrayElement.textContent = numbers.reduce((acc, num) => acc + num, 0);
+sumOfArrayElement.textContent = numbersArray.reduce((acc, num) => acc + num, 0);
 
 /* Output Multiplied by 2 Array */
-Use the map() array method to multiple each element in the array variable by 2 and assign the result to the HTML element with an ID of multiplied.
+const multipliedElement = document.getElementById("multiplied");
+multipliedElement.textContent = numbersArray
+  .map(num => num * 2)
+  .join(', ');
 
 /* Output Sum of Multiplied by 2 Array */
 const sumOfMultipliedElement = document.getElementById("sumOfMultiplied");
-sumOfMultipliedElement.textContent = numbers
+sumOfMultipliedElement.textContent = numbersArray
   .map(num => num * 2)
   .reduce((acc, num) => acc + num, 0);
