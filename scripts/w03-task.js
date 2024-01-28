@@ -24,7 +24,7 @@ const subtract = function(number1, number2) {
     return number1 - number2;
   }
   
-  const subtractNumbers = function() {
+const subtractNumbers = function() {
     const subtract1 = document.getElementById("subtract1");
     const subtract2 = document.getElementById("subtract2");
     const difference = document.getElementById("difference");
