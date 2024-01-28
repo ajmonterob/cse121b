@@ -20,7 +20,22 @@ function addNumbers() {
 document.querySelector('#addNumbers').addEventListener('click', addNumbers); 
 
 /* Function Expression - Subtract Numbers */
-
+const subtract = function(number1, number2) {
+    return number1 - number2;
+  }
+  
+  const subtractNumbers = function() {
+    const subtract1 = document.getElementById("subtract1");
+    const subtract2 = document.getElementById("subtract2");
+    const difference = document.getElementById("difference");
+  
+    const num1 = Number(subtract1.value);
+    const num2 = Number(subtract2.value);
+  
+    difference.value = subtract(num1, num2);
+  }
+  
+  document.querySelector('#subtractNumbers').addEventListener('click', subtractNumbers);
 
 /* Arrow Function - Multiply Numbers */
 
