@@ -38,13 +38,61 @@ const subtract = function(number1, number2) {
   document.querySelector('#subtractNumbers').addEventListener('click', subtractNumbers);
 
 /* Arrow Function - Multiply Numbers */
+const multiply = (number1, number2) => number1 * number2;
 
+const multiplyNumbers = () => {
+  const factor1 = document.getElementById("factor1");
+  const factor2 = document.getElementById("factor2");
+  const product = document.getElementById("product");
+
+  const num1 = Number(factor1.value);
+  const num2 = Number(factor2.value);
+
+  product.value = multiply(num1, num2);
+}
+
+document.querySelector('#multiplyNumbers').addEventListener('click', multiplyNumbers);
 
 /* Open Function Use - Divide Numbers */
-
+function divide(dividend, divisor) {
+    if (divisor === 0) {
+      throw new Error('Cannot divide by zero');
+    }
+    return dividend / divisor;
+  }
+  
+  const divideNumbers = () => {
+    const dividend = document.getElementById("dividend");
+    const divisor = document.getElementById("divisor");
+    const quotient = document.getElementById("quotient");
+  
+    const num1 = Number(dividend.value);
+    const num2 = Number(divisor.value);
+  
+    try {
+      quotient.value = divide(num1, num2);
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+  
+  document.querySelector('#divideNumbers').addEventListener('click', divideNumbers);
 
 /* Decision Structure */
+const subtotal = document.getElementById("subtotal");
+const member = document.getElementById("member");
+const getTotal = document.getElementById("getTotal");
+const total = document.getElementById("total");
 
+getTotal.addEventListener('click', () => {
+  const subtotalValue = Number(subtotal.value);
+  let discount = 0;
+  if (member.checked) {
+    discount = subtotalValue * 0.2;
+  }
+  const totalValue = subtotalValue - discount;
+  total.textContent = `$${totalValue.toFixed(2)}`;
+});
 
 /* ARRAY METHODS - Functional Programming */
 /* Output Source Array */
