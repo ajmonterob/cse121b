@@ -23,8 +23,20 @@ let myProfile = {
 
 
 /* Populate Profile Object with placesLive objects */
-myProfile.placesLived.push({ place: 'Los Angeles, CA', length: '2 years' }).push({ place: 'New York, NY', length: '3 years' });
-
+myProfile.placesLived = [
+    {
+        place: 'Cartago, Costa Rica ',
+        length: '24 year'
+    },
+    {
+        place: 'Heredia, Costa Rica',
+        length: '5 years'
+    },
+    {
+        place: 'Mexico',
+        length: '5 years'
+    }
+];
 /* DOM Manipulation - Output */
 
 /* Name */
@@ -57,5 +69,10 @@ myProfile.placesLived.forEach(place => {
     let dd = document.createElement('dd');
     dd.textContent = place.length;
     document.querySelector('#places-lived').appendChild(dd);
+
+    // Add some basic styles to the <dt> and <dd> elements
+    dt.style.fontWeight = 'bold';
+    dt.style.display = 'block';
+    dd.style.marginLeft = '2em';
 });
 
