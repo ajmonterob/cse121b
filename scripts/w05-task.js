@@ -7,11 +7,6 @@ const templesElement = document.getElementById('temples');
 /* async displayTemples Function */
 const displayTemples = async (temples) => {
   
-   templesElement.style.display = 'grid';
-   templesElement.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))'; 
-   templesElement.style.gap = '20px'; 
-   templesElement.style.padding = '20px'; 
-   templesElement.innerHTML = '';
 
   temples.forEach((temple) => {
     const article = document.createElement('article');
@@ -23,11 +18,6 @@ const displayTemples = async (temples) => {
     const templeImage = document.createElement('img');
     templeImage.src = temple.imageUrl;
     templeImage.alt = temple.location;
-    
-    templeImage.style.width = '100%'; 
-    templeImage.style.height = '200px'; 
-    templeImage.style.objectFit = 'cover'; 
-    templesElement.style.width = '100%';
     article.appendChild(templeName);
     article.appendChild(templeImage);
     templesElement.appendChild(article);
