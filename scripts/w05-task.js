@@ -83,17 +83,3 @@ filteredElement.addEventListener("change", () => {
 getTemples();
 
 
-
-window.addEventListener('resize', adjustImageLayout);
-adjustImageLayout(); // Initial call to adjust layout on load
-
-function adjustImageLayout() {
-    const screenWidth = window.innerWidth;
-    const articleWidth = Math.min(screenWidth / 3 - 20, 300); // Example: 3 items per row - adjust as needed
-    const articles = document.querySelectorAll('#temples article');
-
-    articles.forEach(article => {
-        article.style.width = `${articleWidth}px`; // Adjust article width
-        // If images are not directly styled or need adjustment, you can do so here
-    });
-}
