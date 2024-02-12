@@ -313,3 +313,108 @@ footer {
     }
 
 }
+
+/* Project-specific Styles */
+
+/* Style adjustments for input field */
+#city-input {
+    margin: 20px auto;
+    display: block;
+    width: 80%; /* Adjust based on preference */
+    padding: 0.5rem;
+    border: 2px solid #444; /* Slightly thicker border for focus */
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Enhancements for submit and reset buttons */
+#submit-btn, .reset-btn {
+    margin: 10px auto;
+    display: block;
+    background-color: #007bff; /* Bootstrap primary color for reference */
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reset-btn {
+    background-color: #dc3545; /* Bootstrap danger color for reference */
+}
+
+#submit-btn:hover, .reset-btn:hover {
+    opacity: 0.85;
+}
+
+/* Styling for the weather data display */
+#weather-data .weather-info {
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    width: 90%; /* Adjust based on preference */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+/* Heading for city names in weather info */
+#weather-data .weather-info h2 {
+    color: #007bff; /* Bootstrap primary color for consistency */
+    margin-bottom: 10px;
+}
+
+/* Paragraph styling in weather info */
+#weather-data .weather-info p {
+    font-size: 1rem;
+    color: #333; /* Dark grey for text */
+}
+
+/* Notification area styling */
+#notification {
+    padding: 10px;
+    text-align: center;
+    font-size: 1rem;
+    color: #dc3545; /* Bootstrap danger color for visibility */
+    margin: 20px 0;
+}
+
+/* Custom reset button within notification */
+#notification .reset-btn {
+    margin-top: 10px; /* Additional spacing from text */
+}
+
+
+/* Ensure the navigation bar is properly spaced and displayed */
+nav {
+    /* Example styling for the navigation bar to ensure it's visible and takes up space */
+    background-color: #333; /* Dark background for the nav bar */
+    color: #fff; /* Light text color */
+    padding: 10px 0; /* Add some padding to give space around the links */
+}
+
+ul#menu {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Align menu items properly */
+    display: flex; /* Use flexbox for aligning menu items horizontally */
+    justify-content: start; /* Align items to the start of the nav bar */
+    gap: 20px; /* Add some space between menu items */
+}
+
+ul#menu li a {
+    color: #fff; /* Ensure links are visible against the dark background */
+    text-decoration: none; /* Remove underline from links */
+    padding: 10px; /* Add padding to make links easier to click */
+}
+
+ul#menu li a.active, ul#menu li a:hover {
+    background-color: #555; /* Slight highlight for active/hovered links */
+}
+
+/* Adjust the top margin of the body or main content area */
+body {
+    margin-top: 90px; /* Adjust this value based on the actual height of your navigation bar */
+}
