@@ -14,20 +14,19 @@ document.getElementById('submit-btn').addEventListener('click', function() {
 
     if (!cityInput) {
         alert("Please enter a city name.");
-        return; // Exit if the input is empty
+        return; 
     }
 
-    // Disable the input field and submit button to prevent new entries
+
     cityInputField.disabled = true;
     submitBtn.disabled = true;
 
-    // Check if the city is already in the enteredCities array
-    if (enteredCities.includes(cityInput.toLowerCase())) { // Convert to lowercase for case-insensitive comparison
+
+    if (enteredCities.includes(cityInput.toLowerCase())) { 
         alert("This city has already been added. Please enter a different city.");
-        // Re-enable the input field and submit button
         cityInputField.disabled = false;
         submitBtn.disabled = false;
-        return; // Exit if the city has already been added
+        return; 
     }
 
     if (enteredCities.length < 3) {
@@ -51,16 +50,15 @@ function fetchWeatherData(city) {
             if (data.temperature === "" && data.wind === "" && data.description === "") {
                 throw new Error(`No data found for a city called ${city}`);
             }
-            enteredCities.push(city.toLowerCase()); // Add city to the array only if data is found
+            enteredCities.push(city.toLowerCase()); 
             displayWeatherData(city, data);
             displayCityLocalTime(city);
         })
         .catch(error => {
             console.error('Error:', error);
-            alert(error.message); // Use alert for error messages
+            alert(error.message); 
         })
         .finally(() => {
-            // Re-enable the input field and submit button in both success and error cases
             document.getElementById('city-input').disabled = false;
             submitBtn.disabled = false;
             updateButtonText();
@@ -96,5 +94,4 @@ function resetCities() {
     submitBtn.disabled = false;
 }
 
-// Expose the function to the global scope correctly
 window.resetCities = resetCities;
