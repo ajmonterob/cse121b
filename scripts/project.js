@@ -41,29 +41,47 @@ function fetchWeatherData(city) {
 
     fetch(url)
         .then(response => {
+            // First, check if the response status is 503
+            if (response.status === 503) {
+                // This creates a new error object with a specific message for 503 errors
+                throw new Error(`The weather service is temporarily unavailable. Please try again later.`);
+            }
+            // Check if the response is not OK (excluding the 503 checked above)
             if (!response.ok) {
-                throw new Error(`Failed to retrieve weather data for the city ${city}. Public API not available at the time. Please try again later.`);
+                throw new Error(`Failed to retrieve weather data for the city ${city}. Please try again later.`);
             }
             return response.json();
         })
         .then(data => {
+            // Verify the data isn't empty, as before
             if (data.temperature === "" && data.wind === "" && data.description === "") {
-                throw new Error(`No data found for a city called ${city}`);
+                throw new Error(`No data found for a city called ${city}.`);
             }
-            enteredCities.push(city.toLowerCase()); 
+            // Process and display the data as before
+            enteredCities.push(city.toLowerCase());
             displayWeatherData(city, data);
             displayCityLocalTime(city);
         })
         .catch(error => {
             console.error('Error:', error);
-            alert(error.message); 
+            // Simulate detecting a "503 Service Unavailable" error
+            if (error.message === "Failed to fetch") {
+                // Assuming "Failed to fetch" is treated as a stand-in for the "503 Service Unavailable"
+                alert("The weather service is temporarily unavailable (503 Service Unavailable). Please try again later.");
+            } else {
+                // For other errors, display the actual error message.
+                alert(error.message);
+            }
         })
+        
         .finally(() => {
+            // Re-enable the input and button, allowing further attempts
             document.getElementById('city-input').disabled = false;
             submitBtn.disabled = false;
             updateButtonText();
         });
 }
+
 
 function displayWeatherData(city, data) {
     const weatherHtml = `
