@@ -1,5 +1,3 @@
-// Import the displayCityLocalTime from your utilities
-// Assume displayCityLocalTime is defined elsewhere and properly handles displaying local time for cities
 import { displayCityLocalTime } from './timeUtils.js';
 
 let enteredCities = [];
@@ -7,34 +5,34 @@ const submitBtn = document.getElementById('submit-btn');
 const weatherDataDiv = document.getElementById('weather-data');
 const notificationDiv = document.getElementById('notification');
 
-// Initial button text
 updateButtonText();
 
 document.getElementById('submit-btn').addEventListener('click', function() {
-    let cityInput = document.getElementById('city-input').value.trim();
-    document.getElementById('city-input').value = '';
+    const cityInputField = document.getElementById('city-input');
+    let cityInput = cityInputField.value.trim();
+    cityInputField.value = '';
 
-    // Filter out any empty input and prevent duplicates
-    if (cityInput && !enteredCities.includes(cityInput)) {
-        let newCities = cityInput.split(',')
-            .map(city => city.trim().charAt(0).toUpperCase() + city.trim().slice(1).toLowerCase()) // Capitalize city names
-            .filter(city => city && !enteredCities.includes(city)); // Remove empty and duplicate entries
+    if (!cityInput) {
+        alert("Please enter a city name.");
+        return; // Exit if the input is empty
+    }
 
-        // Add each new city to the array and fetch weather data
-        newCities.forEach(city => {
-            if (enteredCities.length < 3) {
-                enteredCities.push(city);
-                fetchWeatherData(city);
-            }
-        });
+    // Disable the input field and submit button to prevent new entries
+    cityInputField.disabled = true;
+    submitBtn.disabled = true;
 
-        if (newCities.length > 0) {
-            updateButtonText(); // Update the button text each time a city is added
-        } else if (enteredCities.length >= 3) {
-            displayMaxCitiesReachedMessage();
-        }
-    } else if (enteredCities.length >= 3) {
-        // Display a custom message on the page with a reset option
+    // Check if the city is already in the enteredCities array
+    if (enteredCities.includes(cityInput.toLowerCase())) { // Convert to lowercase for case-insensitive comparison
+        alert("This city has already been added. Please enter a different city.");
+        // Re-enable the input field and submit button
+        cityInputField.disabled = false;
+        submitBtn.disabled = false;
+        return; // Exit if the city has already been added
+    }
+
+    if (enteredCities.length < 3) {
+        fetchWeatherData(cityInput);
+    } else {
         displayMaxCitiesReachedMessage();
     }
 });
@@ -43,14 +41,29 @@ function fetchWeatherData(city) {
     const url = `https://goweather.herokuapp.com/weather/${city}`;
 
     fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to retrieve weather data for the city ${city}. Public API not available at the time. Please try again later.`);
+            }
+            return response.json();
+        })
         .then(data => {
+            if (data.temperature === "" && data.wind === "" && data.description === "") {
+                throw new Error(`No data found for a city called ${city}`);
+            }
+            enteredCities.push(city.toLowerCase()); // Add city to the array only if data is found
             displayWeatherData(city, data);
-            displayCityLocalTime(city); // Ensure this function is correctly implemented
+            displayCityLocalTime(city);
         })
         .catch(error => {
-            console.error('Error fetching weather data for city:', city, error);
-            weatherDataDiv.innerHTML += `<p>Failed to retrieve weather data for ${city}. Please try again.</p>`;
+            console.error('Error:', error);
+            alert(error.message); // Use alert for error messages
+        })
+        .finally(() => {
+            // Re-enable the input field and submit button in both success and error cases
+            document.getElementById('city-input').disabled = false;
+            submitBtn.disabled = false;
+            updateButtonText();
         });
 }
 
@@ -78,8 +91,10 @@ function resetCities() {
     enteredCities = [];
     weatherDataDiv.innerHTML = '';
     notificationDiv.innerHTML = '';
-    updateButtonText(); // Reset the button text to initial state
+    updateButtonText(); 
+    document.getElementById('city-input').disabled = false;
+    submitBtn.disabled = false;
 }
 
-// Make resetCities globally accessible for the inline onclick handler
+// Expose the function to the global scope correctly
 window.resetCities = resetCities;
